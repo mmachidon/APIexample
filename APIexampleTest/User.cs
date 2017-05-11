@@ -7,99 +7,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 namespace APIexampleTest
 {
-    public class Extension
-    {
-        public List <string>  Attributes { get; set; }
-        public object Categories { get; set; }
-        public object Contacts { get; set; }
-        public object Images { get; set; }
-        public object Packages { get; set; }
-        public object Url { get; set; }
-        public object Users { get; set; }
-
-    }
-     
-    public class AddressLine
-    {
-        public string en { get; set; }
-    }
-
-    public class Id
-    {
-        [JsonProperty("Id")]
-        public string Idvalue { get; set; }
-        [JsonProperty("Keys")]
-        public object Keys { get; set; }
-        [JsonProperty("ObjectTypeId")]
-        public int ObjectTypeId { get; set; }
-    }
-
-    public class Name
-    {
-        public string ar { get; set; }
-        public string ca { get; set; }
-        public string de { get; set; }
-        public string en { get; set; }
-        public string es { get; set; }
-        public string fr { get; set; }
-        public string id { get; set; }
-        public string it { get; set; }
-        public string ja { get; set; }
-        public string ko { get; set; }
-        public string pt { get; set; }
-        [JsonProperty("pt-BR")]
-        public string pt_BR { get; set; }
-        public string ru { get; set; }
-        public string sk { get; set; }
-        public string tr { get; set; }
-        public string vi { get; set; }
-        [JsonProperty("zh-CN")]
-        public string zh_CN { get; set; }
-        [JsonProperty("zh-HK")]
-        public string zh_HK { get; set; }
-    }
-
-    public class Country
-    {
-        public string CallingCode { get; set; }
-        public string DisplayName { get; set; }
-        public Id Id { get; set; }
-        public string Iso3Code { get; set; }
-        public string IsoCode { get; set; }
-        public Name Name { get; set; }
-    }
-
-    public class Address
-    {
-        public Extension Extension { get; set; }
-        public Id Id { get; set; }
-        public object __type { get; set; }
-        public bool IsNew { get; set; }
-        public object Tag { get; set; }
-        public AddressLine AddressLine1 { get; set; }
-        public AddressLine AddressLine2 { get; set; }
-        public AddressLine AddressLine3 { get; set; }
-        public object City { get; set; }
-        public Country Country { get; set; }
-        public int CountryId { get; set; }
-        public object PostCode { get; set; }
-        public object SubRegion { get; set; }
-    }
-
-    public class MultilingualFirstName
-    {
-        public string en { get; set; }
-        [JsonProperty("zh-HK")]
-        public string zh_HK { get; set; }
-    }
-
-    public class MultilingualLastName
-    {
-        public string en { get; set; }
-        [JsonProperty("zh-HK")]
-        public string zh_HK { get; set; }
-    }
-
     public class User
     {
 
@@ -111,7 +18,6 @@ namespace APIexampleTest
         public object ActivationDate { get; set; }
         public string ActivationId { get; set; }
         public Address Address { get; set; }
-        public string CreatedDate { get; set; }
         public object Culture { get; set; }
         public string Email { get; set; }
         public object Fax { get; set; }
@@ -126,6 +32,66 @@ namespace APIexampleTest
         public string UniqueId { get; set; }
         public string Username { get; set; }
         public object WebsiteUrl { get; set; }
+
+        public User()
+        {
+            MultilingualFirstName mFirstName = new MultilingualFirstName();
+            MultilingualLastName mLastName = new MultilingualLastName();
+            Extension extension = new Extension();
+            List<string> list = new List<string>();
+            Address address = new Address();
+            AddressLine addresslLine = new AddressLine();
+            Country country = new Country();
+            Name name = new Name();
+            Id id = new Id();
+            id.Idvalue = "10";
+            id.ObjectTypeId = 111;
+
+            mFirstName.en = "FN_08May1104s2362";
+            mFirstName.zh_HK = "FN_08May1104s2362";
+            mLastName.en = "LN_08May1104s2362";
+            mLastName.zh_HK = "LN_08May1104s2362";
+            extension.Attributes = list;
+
+            name.ca = "Antàrtida";
+            name.de = "Antarktis";
+            country.CallingCode = "672";
+            country.DisplayName = "Antarctica";
+            country.Iso3Code = "ATA";
+            country.IsoCode = "AQ";
+            country.Id = id;
+            country.Name = name;
+            address.Country = country;
+            addresslLine.en = "Address Line 1";
+            address.IsNew = false;
+            address.AddressLine1 = addresslLine;
+            address.CountryId = 10;
+            address.Extension = extension;
+
+            this.Address = address;
+            this.Extension = extension;
+            this.Id = id;
+            this.MultilingualFirstName = mFirstName;
+            this.MultilingualLastName = mLastName;
+            this.Username = "eg803t3@8323j2.reedtest";
+            this.Email = "eg803t3@8323j2.reedtest";
+            this.__type = "User:#ReedExpo.Nova.Framework.Security";
+            this.IsNew = false;
+            this.IsLockedOut = false;
+            this.ActivationId = "00000000-0000-0000-0000-000000000000";
+            this.UniqueId = "00000000-0000-0000-0000-000000000001";
+        }
+
+        public User(MultilingualFirstName mFirstName, MultilingualLastName mLastName, Extension extension ,
+        Address address ,    
+        Id id)
+        {
+            this.Address = address;
+            this.Extension = extension;
+            this.Id = id;
+            this.MultilingualFirstName = mFirstName;
+            this.MultilingualLastName = mLastName;
+        }
     }
 }
     
